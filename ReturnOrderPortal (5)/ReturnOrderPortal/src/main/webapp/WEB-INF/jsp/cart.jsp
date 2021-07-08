@@ -58,7 +58,7 @@
                         <a class="nav-link" href="#">Contact</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Login</a>
+                        <a class="nav-link" href="login">Log-Out</a>
                     </li>
 
                 </ul>

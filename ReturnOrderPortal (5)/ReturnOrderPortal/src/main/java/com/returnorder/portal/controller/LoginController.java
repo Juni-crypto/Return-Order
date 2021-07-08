@@ -61,7 +61,7 @@ public class LoginController {
 		request.getSession().setAttribute("token", "Bearer " + token.getJwtAuthToken());
 		request.getSession().setAttribute("user", model.getUserName());
 		log.info(" ========After Token generation ======");
-		log.info(token.getJwtAuthToken());
+		log.info("easESFc"+token.getJwtAuthToken());
 
 		return new ModelAndView(new RedirectView("order"));
 
