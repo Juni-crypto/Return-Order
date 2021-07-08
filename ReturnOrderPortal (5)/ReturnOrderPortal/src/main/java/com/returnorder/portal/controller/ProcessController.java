@@ -1,5 +1,6 @@
 package com.returnorder.portal.controller;
 
+import javax.annotation.Generated;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
@@ -20,11 +21,17 @@ import com.returnorder.portal.client.AuthClient;
 
 import com.returnorder.portal.client.ComponentClient;
 import com.returnorder.portal.dto.PaymentStatusDTO;
+import com.returnorder.portal.model.ChangePasswordModel;
+import com.returnorder.portal.model.FinalPaymentmodel;
 import com.returnorder.portal.model.ProcessRequest;
 import com.returnorder.portal.model.ProcessResponse;
 import com.returnorder.portal.model.TrackRequest;
 import com.returnorder.portal.service.ProcessRequestServiceImpl;
 import com.returnorder.portal.service.ProcessResponseService;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;  
+import java.util.Date;
 
 
 
@@ -40,8 +47,11 @@ public class ProcessController {
 	ProcessResponse processResponse;
 	@Autowired
 	AuthClient authClient;
+	
 
+	
 	PaymentStatusDTO paymentStatusDTO = new PaymentStatusDTO();
+	FinalPaymentmodel payment=new FinalPaymentmodel();
 
 	@GetMapping("/order")
 	public ModelAndView showProcessing() {
@@ -61,38 +71,56 @@ public class ProcessController {
 			processResponse = processRequestServiceImplObj.processRequestSaveService(model,(String)request.getSession().getAttribute("token"));
 
 			mv.addObject("response", processResponse);
-
+			payment.setContactNumber(model.getContactNumber());
+			payment.setCustomername(model.getUserName());
+			payment.setDateofDelivery(processResponse.getDateOfDelivery().substring(0, 10));
+			payment.setRequestid(processResponse.getRequestId());
+			payment.setComponent(model.getComponentName());
+			payment.setCost(processResponse.getPackagingAndDeliveryCharge()+processResponse.getProcessingCharge());
+			mv.addObject("date",processResponse.getDateOfDelivery().substring(0, 10));
 			paymentStatusDTO = processRequestServiceImplObj.statusDetails(model,(String)request.getSession().getAttribute("token"));
 			mv.addObject("payment", paymentStatusDTO);
 			log.info(model.toString());
       
 				mv.setViewName("cart");
 				return mv;
-	
 
 		} catch (Exception e) {
 			mv.setViewName("cart");
-				return mv;
-			
-			
+				return mv;			
 		}
-
-		
-
 	}
+	
+	@GetMapping("/paid")
+	public ModelAndView payment()
+	{
+		ModelAndView mv= new ModelAndView("orderDetails");
+		mv.addObject("ContactNumber",payment.getContactNumber());
+		mv.addObject("Customername",payment.getCustomername());
+		mv.addObject("DateofDelivery",payment.getDateofDelivery());
+		mv.addObject("Requestid",payment.getRequestid());
+		mv.addObject("Component",payment.getComponent());
+		mv.addObject("cost",payment.getCost());
+		mv.addObject("paymentmsg","Your Return Order Has Been Succesfully made with an Tracking id of "+payment.getRequestid());
+		mv.setViewName("paid");
+		return mv;
+	}
+	
+	
 	
 	@Autowired
 	ProcessResponseService processResponseService;
 		
 	@GetMapping("/orderrequest/*")
-	public ModelAndView showStatus(@RequestParam("requestId")String requestId) {
+	public ModelAndView showStatus(@RequestParam("requestId")String requestId) throws ParseException {
 		ModelAndView mv = new ModelAndView("requestStatus");
 		ProcessResponse obj = processResponseService.findByRequestId(requestId);
 		if(obj!=null) {
-			mv.addObject("request", "Request Id:" + obj.getRequestId());
-			mv.addObject("date", "Date:"+ obj.getDateOfDelivery());
-			mv.addObject("charge", "Packaging and Delivery Charge:"+ obj.getPackagingAndDeliveryCharge());
-			mv.addObject("prCharge","Processing Charge:"+ obj.getProcessingCharge());
+			
+			mv.addObject("request", "Request Id: " + obj.getRequestId());
+			mv.addObject("date", "Date: "+ obj.getDateOfDelivery().substring(0, 10));
+			mv.addObject("charge", "Packaging and Delivery Charge: "+ obj.getPackagingAndDeliveryCharge());
+			mv.addObject("prCharge","Processing Charge: "+ obj.getProcessingCharge());
 			mv.addObject("id",obj.getRequestId());
 			return mv;
 			
@@ -127,8 +155,33 @@ public class ProcessController {
 
 		return mv;
 	}
+	@GetMapping("/passwordchange")
+	public ModelAndView changepassword()
+	{
+		ModelAndView mv = new ModelAndView("passwordchange");
+		mv.addObject("passchange", new ChangePasswordModel());
+		mv.setViewName("passchange");
+		return mv;
+	}
 	
-
+@PostMapping("/passwordchange")
+public ModelAndView passchange(@ModelAttribute("passchange") ChangePasswordModel pass,BindingResult result,
+		HttpServletRequest request) throws FeignException
+{
+	ModelAndView mv=new ModelAndView("passwordchange");
+	//System.out.println(pass.getUsername()+pass.getNewpassword()+pass.getOldpassword());
+try {	authClient.changePassword(pass);
+}
+catch (Exception e) {
+	mv.addObject("message","your password has not been succesfully updated");
+	mv.setViewName("passchange2");
+	return mv;
+}
+	mv.addObject("message","your password has been succesfully updated");
+	mv.setViewName("passchange2");
+	return mv;
+	
+}
 
 
 

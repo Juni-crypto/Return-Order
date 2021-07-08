@@ -27,8 +27,11 @@
 </div>
 </div>
 <br>
-<button type="submit"  class="btn btn-primary">Search</button>
+<button type="submit"  class="btn btn-primary">Search</button><a href="order">  <button class="btn btn-primary">Home-Page</button></a>
 </form:form>
+<br>
+<img alt="searching" src="https://media.tenor.com/images/3ce8820ca4465328f4aa59674073b18b/tenor.gif">
+
 </div>
 </body>
 </html>

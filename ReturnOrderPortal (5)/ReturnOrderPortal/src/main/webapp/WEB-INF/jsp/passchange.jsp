@@ -39,7 +39,7 @@
 
 
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Home</a>
+                        <a class="nav-link" href="order">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">About</a>
@@ -68,31 +68,7 @@
             </div>
         </nav>
 
-        <!-- progreebar start -->
 
-        <div class="row">
-            <div class="col-lg">
-                <div class="progress">
-                    <div class="progress-bar progress-bar-striped bg-warning " role="progressbar" style="width: 100%"
-                        aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-            </div>
-            <div class="col-lg">
-                <div class="progress">
-                    <div class="progress-bar progress-bar-striped bg-info progress-bar-animated " role="progressbar" style="width: 100%"
-                        aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">Step 2</div>
-                </div>
-            </div>
-            <div class="col-lg">
-                <div class="progress">
-                    <div class="progress-bar progress-bar-striped bg-success " role="progressbar" style="width: 100%"
-                        aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-            </div>
-
-        </div>
-        
-        <!-- progress bar ends -->
     </div>
 
     <!-- form -->
@@ -106,57 +82,24 @@
         <div class="row justify-content-md-center">
             <div class="col-md-8">
                 <div class="jumbotron" style="border-radius: 32px ;opacity: 85%;">
-                    <h1 class="display-8">Your Cart Summary </h1>
+                    <h1 class="display-8">Change Your Password</h1>
                     <br><br>
-                        <div class="form-row d-flex justify-content-center">
-                            <div class="col-md-8 mb-3">
-                            <table class="table table-hover table-dark">
-                            <thead>
-                            <tr>
-                            <th scope="col">Details</th>
-                            <th scope="col">Estimated Amount</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                            <th>Name</th>
-                            <th>${model.userName}</th>
-                            </tr>
-                             <tr>
-                            <th>Component Name</th>
-                            <th>${model.componentName}</th>
-                            </tr>
-                             <tr>
-                            <th>Component Type</th>
-                            <th>${model.componentType}</th>
-                            </tr>
-                             <tr>
-                            <th>ProcessingCharge</th>
-                            <th>$${response.processingCharge}.0</th>
-                            </tr>
-                             <tr>
-                            <th>Packaging & Delivery Charge</th>
-                            <th>$${response.packagingAndDeliveryCharge}</th>
-                            </tr>
-                             <tr>
-                            <th>ContactNumber</th>
-                            <th>${model.contactNumber}</th>
-                            </tr>
-                             <tr>
-                            <th>Date-Of-Delivery</th>
-                            <th>${date}</th>
-                            </tr>
-                             <tr>
-                            <th>Quantity</th>
-                            <th>${model.quantity}</th>
-                            </tr>
-                            </tbody>
-                            </table>
-                            </div>
-                        </div>
+                        <form:form method="post"> 
+ <div class="row">
+ <div class="col-md-6 ">
+<label for="User Name">User-Name</label>
+<input type="text" class="form-control" id="username"placeholder="Enter the User-Name" name= "username" required>
+<label for="Oldpassword">Old-Password</label>
+<input type="password" class="form-control" id="Oldpassword"placeholder="Enter the Old-Password" name= "Oldpassword" required>
+<label for="Newpassword">New-Password</label>
+<input type="password" class="form-control" id="Newpassword"placeholder="Enter the New-Password" name= "Newpassword" required>
+</div>
+</div>
+<br>
+<button type="submit"  class="btn btn-primary">Submit</button>
+</form:form>
                         <!-- Alldiv ends -->
-                        <a href="paid"><button class="btn btn-primary">Pay</button></a>
-                        <!-- <h1 class="display-8 text-info">${payment.status}</h1> -->
+                        <!--<a href="paid"><button class="btn btn-primary">Pay</button></a>-->
                         <!-- <h1 class="display-8 text-info"> Processed Successfully</h1> -->
                 </div>
             </div>

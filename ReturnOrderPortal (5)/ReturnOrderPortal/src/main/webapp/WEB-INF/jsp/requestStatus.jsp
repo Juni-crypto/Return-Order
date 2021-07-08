@@ -25,7 +25,12 @@
 <p>${charge}</p>
 <p>${prCharge}</p>
 <p>${errmsg}</p>
-<a href="cancelrequest/${id}"><button class="btn btn-primary">Cancel-Request</button></a>
+<a href="cancelrequest/${id}"><button class="btn btn-primary">Cancel-Request</button></a>  <a href="/portal/order"><button class="btn btn-primary">Home-Page</button></a>
+<br>
+<br>
+<img alt="foundit" src="https://media4.giphy.com/media/l0HlDxWbDj8bQPM1W/giphy.gif?cid=790b76118b2c3db7c9154c4372b5e07d4ee5fa18908eb10b&rid=giphy.gif&ct=g"  width="200" height="150">
+
+
 </div>
 </div>
 </div>

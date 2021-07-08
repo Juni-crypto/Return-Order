@@ -39,7 +39,7 @@
 
 
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Home</a>
+                        <a class="nav-link" href="order">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">About</a>
@@ -79,14 +79,14 @@
             </div>
             <div class="col-lg">
                 <div class="progress">
-                    <div class="progress-bar progress-bar-striped bg-info progress-bar-animated " role="progressbar" style="width: 100%"
-                        aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">Step 2</div>
+                    <div class="progress-bar progress-bar-striped bg-info " role="progressbar" style="width: 100%"
+                        aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
             </div>
-            <div class="col-lg">
+                <div class="col-lg">
                 <div class="progress">
-                    <div class="progress-bar progress-bar-striped bg-success " role="progressbar" style="width: 100%"
-                        aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                    <div class="progress-bar progress-bar-striped bg-success progress-bar-animated " role="progressbar" style="width: 100%"
+                        aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">Step 3</div>
                 </div>
             </div>
 
@@ -110,53 +110,40 @@
                     <br><br>
                         <div class="form-row d-flex justify-content-center">
                             <div class="col-md-8 mb-3">
-                            <table class="table table-hover table-dark">
+                            <table class="table table-hover table-dark pl-25" style="align-items: center;">
                             <thead>
                             <tr>
-                            <th scope="col">Details</th>
-                            <th scope="col">Estimated Amount</th>
+                            <th scope="col" colspan="2"><center>Details of the Payment</center></th>
                             </tr>
                             </thead>
                             <tbody>
                             <tr>
                             <th>Name</th>
-                            <th>${model.userName}</th>
+                            <th>${Customername}</th>
                             </tr>
                              <tr>
                             <th>Component Name</th>
-                            <th>${model.componentName}</th>
+                            <th>${Component}</th>
                             </tr>
                              <tr>
-                            <th>Component Type</th>
-                            <th>${model.componentType}</th>
-                            </tr>
-                             <tr>
-                            <th>ProcessingCharge</th>
-                            <th>$${response.processingCharge}.0</th>
-                            </tr>
-                             <tr>
-                            <th>Packaging & Delivery Charge</th>
-                            <th>$${response.packagingAndDeliveryCharge}</th>
+                            <th>Total Amount Paid</th>
+                            <th>$${cost}</th>
                             </tr>
                              <tr>
                             <th>ContactNumber</th>
-                            <th>${model.contactNumber}</th>
+                            <th>${ContactNumber}</th>
                             </tr>
                              <tr>
                             <th>Date-Of-Delivery</th>
-                            <th>${date}</th>
-                            </tr>
-                             <tr>
-                            <th>Quantity</th>
-                            <th>${model.quantity}</th>
+                            <th>${DateofDelivery}</th>
                             </tr>
                             </tbody>
                             </table>
                             </div>
                         </div>
                         <!-- Alldiv ends -->
-                        <a href="paid"><button class="btn btn-primary">Pay</button></a>
-                        <!-- <h1 class="display-8 text-info">${payment.status}</h1> -->
+                        <!--<a href="paid"><button class="btn btn-primary">Pay</button></a>-->
+                        <h3 class="display-8 text-info">${paymentmsg}</h3>
                         <!-- <h1 class="display-8 text-info"> Processed Successfully</h1> -->
                 </div>
             </div>
@@ -238,6 +225,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
+        
 
 
 

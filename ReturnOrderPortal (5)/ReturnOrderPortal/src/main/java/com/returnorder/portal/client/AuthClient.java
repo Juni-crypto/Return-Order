@@ -2,9 +2,11 @@
 
 import com.returnorder.portal.dto.AuthenticationResponseDTO;
 import com.returnorder.portal.dto.ValidatingDTO;
+import com.returnorder.portal.model.ChangePasswordModel;
 import com.returnorder.portal.model.LoginModel;
 
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,6 +24,10 @@ import org.springframework.web.bind.annotation.RequestHeader;
         @GetMapping(value = "/validate")
         public ValidatingDTO getsValidity(@RequestHeader(name = "Authorization", required = true) String token);
         
-    }
+        @PostMapping("/ChangePassword")
+    	public ResponseEntity<String> changePassword(@RequestBody ChangePasswordModel changePasswordModel);
+   
+
+}
     
 
